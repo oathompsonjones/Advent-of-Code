@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/8
+/* eslint-disable max-lines */
 
 const input = [
     "nop +346",
@@ -631,35 +632,51 @@ const input = [
 
 // Part 1
 class LMC {
-    constructor (code, showOutput) {
+    constructor(code, showOutput) {
         this.accumulator = 0;
         this.currentLine = 0;
         this.metLines = [];
-        for (; !this.metLines.includes(this.currentLine) && this.currentLine < code.length; ++this.currentLine) {
+        for (;
+            !this.metLines.includes(this.currentLine) && this.currentLine < code.length;
+            ++this.currentLine
+        ) {
             this.metLines.push(this.currentLine);
-            const instruction = code[ this.currentLine ].split(" ")[ 0 ];
-            const value = code[ this.currentLine ].split(" ")[ 1 ];
-            if (showOutput) console.log(this.currentLine.toString().padStart(3, "0"), instruction, value);
-            this[ instruction ](value);
+            const [instruction] = code[this.currentLine].split(" ");
+            const [, value] = code[this.currentLine].split(" ");
+            if (showOutput)
+                console.log(this.currentLine.toString().padStart(3, "0"), instruction, value);
+            this[instruction](value);
         }
-        return [ this.metLines.includes(code.length - 1), this.accumulator ];
+        // eslint-disable-next-line no-constructor-return
+        return [this.metLines.includes(code.length - 1), this.accumulator];
     }
 
-    acc(n) { this.accumulator += parseInt(n); }
-    nop(_) { }
-    jmp(n) { this.currentLine += parseInt(n) - 1; }
+    acc(n) {
+        this.accumulator += parseInt(n, 10);
+    }
+
+    static nop() {
+        // Empty
+    }
+
+    jmp(n) {
+        this.currentLine += parseInt(n, 10) - 1;
+    }
 }
-console.log(new LMC(input)[ 1 ]);
+console.log(new LMC(input)[1]);
 
 // Part 2
 for (let i = 0; i < input.length; ++i) {
-    const code = [ ...input ];
-    if (code[ i ].startsWith("jmp")) code[ i ] = code[ i ].replace("jmp", "nop");
-    else if (code[ i ].startsWith("nop")) code[ i ] = code[ i ].replace("nop", "jmp");
-    else continue;
+    const code = [...input];
+    if (code[i].startsWith("jmp"))
+        code[i] = code[i].replace("jmp", "nop");
+    else if (code[i].startsWith("nop"))
+        code[i] = code[i].replace("nop", "jmp");
+    else
+        continue;
     const out = new LMC(code);
-    if (out[ 0 ]) {
-        console.log(out[ 1 ]);
+    if (out[0]) {
+        console.log(out[1]);
         break;
     }
 }

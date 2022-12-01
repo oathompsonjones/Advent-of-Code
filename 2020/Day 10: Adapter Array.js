@@ -154,55 +154,61 @@ const inputs = [
         3
     ]
 ];
-input = inputs[ 0 ];
+[input] = inputs;
 
 // Part 1
-const arr = [ 0 ].concat(input.sort((a, b) => a - b)).concat([ Math.max(...input) + 3 ]);
+const arr = [0].concat(input.sort((a, b) => a - b)).concat([Math.max(...input) + 3]);
 const differences = [];
-arr.forEach((x, i) => differences.push(arr[ i + 1 ] - x));
+arr.forEach((x, i) => differences.push(arr[i + 1] - x));
 console.log(differences.filter((x) => x === 1).length * differences.filter((x) => x === 3).length);
 
 // Part 2
-function take1() {
+/* Function take1() {
     const arrangements = [];
-    const skipable = (n) => n.filter((_, i) => n[ i + 1 ] - n[ i - 1 ] <= 3);
+    const skipable = (n) => n.filter((_, i) => n[i + 1] - n[i - 1] <= 3);
     const recursive = (n) => {
         arrangements.push(n);
         skipable(n).forEach((x) => recursive(n.filter((y) => x !== y)));
     };
     recursive(arr);
     console.log(skipable(arr));
-    console.log(skipable(arr).length, [ ...new Set(arrangements.map((x) => JSON.stringify(x))) ].map((x) => JSON.parse(x)).length);
-}
+    console.log(
+        skipable(arr).length,
+        [...new Set(arrangements.map((x) => JSON.stringify(x)))].map((x) => JSON.parse(x)).length
+    );
+} */
 
-function take2() {
+/* Function take2() {
     const combos = (input) => {
         const combos = [];
-        const x = Math.pow(2, input.length);
+        const x = 2 ** input.length;
         for (let i = 0; i < x; ++i) {
             const temp = [];
-            for (let j = 0; j < input.length; ++j) if (i & Math.pow(2, j)) temp.push(input[ j ]);
+            for (let j = 0; j < input.length; ++j) if (i & 2 ** j) temp.push(input[j]);
             if (temp.length) combos.push(temp);
         }
         return combos;
     };
     const allCombinations = combos(arr.slice(1, arr.length - 1));
-    const validCombinations = allCombinations.map((x) => [ 0 ].concat(x).concat(arr[ arr.length - 1 ])).filter((x) => {
-        for (let j = 1; j < x.length; ++j) if (x[ j ] - x[ j - 1 ] > 3) return false;
-        return true;
-    });
+    const validCombinations = allCombinations.map((x) => [0].concat(x).concat(arr[arr.length - 1]))
+        .filter((x) => {
+            for (let j = 1; j < x.length; ++j) if (x[j] - x[j - 1] > 3) return false;
+            return true;
+        });
     console.log(validCombinations.length);
-}
+} */
 
 let arrangements = 1;
-const tribonacci = [ 0, 1, 2, 4, 7, 13, 24 ];
-for (let i = 7; i < 100; ++i) tribonacci.push(tribonacci[ i - 1 ] + tribonacci[ i - 2 ] + tribonacci[ i - 3 ]);
-// console.log(tribonacci);
+const tribonacci = [0, 1, 2, 4, 7, 13, 24];
+for (let i = 7; i < 100; ++i)
+    tribonacci.push(tribonacci[i - 1] + tribonacci[i - 2] + tribonacci[i - 3]);
+console.log(tribonacci);
 let oneJoltDifferences = 0;
 for (let i = 1; i < arr.length; ++i) {
-    if (arr[ i ] - arr[ i - 1 ] === 1) oneJoltDifferences++;
-    else if (oneJoltDifferences > 0) {
-        arrangements *= tribonacci[ oneJoltDifferences ];
+    if (arr[i] - arr[i - 1] === 1) {
+        oneJoltDifferences++;
+    } else if (oneJoltDifferences > 0) {
+        arrangements *= tribonacci[oneJoltDifferences];
         oneJoltDifferences = 0;
     }
 }

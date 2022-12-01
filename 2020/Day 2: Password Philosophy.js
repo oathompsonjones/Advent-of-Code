@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/2
+/* eslint-disable max-lines */
 
 const input = [
     "7-9 l: vslmtglbc",
@@ -1006,32 +1007,35 @@ const input = [
 // Part 1
 let valid = 0;
 input.forEach((string) => {
-    const policy = string.split(": ")[ 0 ];
-    const min = parseInt(policy.split("-")[ 0 ]);
-    const max = parseInt(policy.split("-")[ 1 ].split(" ")[ 0 ]);
-    const letter = policy.split("-")[ 1 ].split(" ")[ 1 ];
-    const password = string.split(": ")[ 1 ];
+    const [policy] = string.split(": ");
+    const min = parseInt(policy.split("-")[0], 10);
+    const max = parseInt(policy.split("-")[1].split(" ")[0], 10);
+    const [, letter] = policy.split("-")[1].split(" ");
+    const [, password] = string.split(": ");
 
     let charCount = 0;
     password.split("").forEach((char) => {
-        if (char === letter) charCount++;
+        if (char === letter)
+            charCount++;
     });
-    if (charCount >= min && charCount <= max) valid++;
+    if (charCount >= min && charCount <= max)
+        valid++;
 });
 console.log(valid);
 
 // Part 2
 valid = 0;
 input.forEach((string) => {
-    const policy = string.split(": ")[ 0 ];
-    const index1 = parseInt(policy.split("-")[ 0 ]) - 1;
-    const index2 = parseInt(policy.split("-")[ 1 ].split(" ")[ 0 ]) - 1;
-    const letter = policy.split("-")[ 1 ].split(" ")[ 1 ];
-    const password = string.split(": ")[ 1 ];
+    const [policy] = string.split(": ");
+    const index1 = parseInt(policy.split("-")[0], 10) - 1;
+    const index2 = parseInt(policy.split("-")[1].split(" ")[0], 10) - 1;
+    const [, letter] = policy.split("-")[1].split(" ");
+    const [, password] = string.split(": ");
 
     if (
-        password[ index1 ] === letter && password[ index2 ] !== letter ||
-        password[ index1 ] !== letter && password[ index2 ] === letter
-    ) valid++;
+        password[index1] === letter && password[index2] !== letter ||
+        password[index1] !== letter && password[index2] === letter
+    )
+        valid++;
 });
 console.log(valid);

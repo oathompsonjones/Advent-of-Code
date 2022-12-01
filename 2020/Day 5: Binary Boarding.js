@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/5
+/* eslint-disable max-lines */
 
 const input = [
     "FFBFBBBRLR",
@@ -774,12 +775,14 @@ const input = [
 ];
 
 // Part 1
-const ids = input.map((seat) =>
-    parseInt(seat.slice(0, 7).replace(/F/g, "0").replace(/B/g, "1"), 2) * 8 +
-    parseInt(seat.slice(7, 10).replace(/L/g, "0").replace(/R/g, "1"), 2)
-);
+const ids = input.map((seat) => parseInt(seat.slice(0, 7).replace(/F/gu, "0")
+    .replace(/B/gu, "1"), 2) * 8 +
+    parseInt(seat.slice(7, 10).replace(/L/gu, "0")
+        .replace(/R/gu, "1"), 2));
 console.log(Math.max(...ids));
 
 // Part 2
-const missingIDs = Array(818).fill(0).map((_, i) => i).filter((x) => !ids.includes(x));
+const missingIDs = Array(818).fill(0)
+    .map((_, i) => i)
+    .filter((x) => !ids.includes(x));
 console.log(missingIDs);

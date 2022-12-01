@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/14
+/* eslint-disable max-lines */
 
 const input = [
     "mask = 1010X101010010101X00X00011XX11011111",
@@ -583,15 +584,19 @@ const input = [
 let mask = "";
 let mem = [];
 for (const line of input) {
-    if (line.startsWith("mask")) mask = line.slice(7);
+    if (line.startsWith("mask"))
+        mask = line.slice(7);
     if (line.startsWith("mem")) {
-        const index = line.slice(4).split("]")[ 0 ];
-        let value = parseInt(line.split(" = ")[ 1 ]).toString(2).padStart(mask.length, "0").split("");
+        const [index] = line.slice(4).split("]");
+        let value = parseInt(line.split(" = ")[1], 10).toString(2)
+            .padStart(mask.length, "0")
+            .split("");
         mask.split("").forEach((char, i) => {
-            if (char !== "X") value[ i ] = char;
+            if (char !== "X")
+                value[i] = char;
         });
         value = value.join("");
-        mem[ index ] = parseInt(value, 2);
+        mem[index] = parseInt(value, 2);
     }
 }
 console.log(mem.reduce((a, b) => a + b));
@@ -600,27 +605,33 @@ console.log(mem.reduce((a, b) => a + b));
 mem = new Map();
 mask = "";
 for (const line of input) {
-    if (line.startsWith("mask")) mask = line.slice(7);
-    else if (line.startsWith("mem")) {
-        const value = parseInt(line.split(" = ")[ 1 ]);
-        let index = parseInt(line.slice(4).split("]")[ 0 ]).toString(2).padStart(mask.length, "0").split("");
+    if (line.startsWith("mask")) {
+        mask = line.slice(7);
+    } else if (line.startsWith("mem")) {
+        const value = parseInt(line.split(" = ")[1], 10);
+        const index = parseInt(line.slice(4).split("]")[0], 10).toString(2)
+            .padStart(mask.length, "0")
+            .split("");
         mask.split("").forEach((char, i) => {
-            if (char === "1" || char === "X") index[ i ] = char;
+            if (char === "1" || char === "X")
+                index[i] = char;
         });
         const indexes = [];
-        for (let i = 0; i < Math.pow(2, index.filter((x) => x === "X").length); ++i) {
+        for (let i = 0; i < 2 ** index.filter((x) => x === "X").length; ++i) {
             const currentIndex = [];
             const bin = i.toString(2).padStart(index.filter((x) => x === "X").length, "0");
             let j = 0;
             index.forEach((char) => {
                 if (char === "X") {
-                    currentIndex.push(bin[ j ]);
+                    currentIndex.push(bin[j]);
                     ++j;
-                } else currentIndex.push(char);
+                } else {
+                    currentIndex.push(char);
+                }
             });
             indexes.push(parseInt(currentIndex.join(""), 2));
         }
         indexes.forEach((x) => mem.set(x, value));
     }
 }
-console.log([ ...mem.values() ].reduce((a, b) => a + b));
+console.log([...mem.values()].reduce((a, b) => a + b));

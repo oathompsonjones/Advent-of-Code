@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/3
+/* eslint-disable max-lines */
 
 const input = [
     "...#.....#.......##......#.....",
@@ -328,18 +329,30 @@ const input = [
 
 // Part 1
 let treeCount = 0;
-for (let x = 0, y = 0; x < input[ 0 ].length && y < input.length; x = (x + 3) % input[ 0 ].length, y++) {
-    if (input[ y ][ x ] === "#") treeCount++;
+for (
+    let x = 0, y = 0;
+    x < input[0].length && y < input.length;
+    x = (x + 3) % input[0].length, y++
+) {
+    if (input[y][x] === "#")
+        treeCount++;
 }
+
 console.log(treeCount);
 
 // Part 2
 const slope = (right, down) => {
-    let treeCount = 0;
-    for (let x = 0, y = 0; x < input[ 0 ].length && y < input.length; x = (x + right) % input[ 0 ].length, y += down) {
-        if (input[ y ][ x ] === "#") treeCount++;
+    let treeCount1 = 0;
+    for (
+        let x = 0, y = 0;
+        x < input[0].length && y < input.length;
+        x = (x + right) % input[0].length, y += down
+    ) {
+        if (input[y][x] === "#")
+            treeCount1++;
     }
-    return treeCount;
+
+    return treeCount1;
 };
 console.log(
     slope(1, 1) *

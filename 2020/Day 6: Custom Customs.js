@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/6
+/* eslint-disable max-lines */
 
 const input = `xav
 uavx
@@ -2241,16 +2242,17 @@ mchio
 hciwosm`.split("\n\n");
 
 // Part 1
-let sums = input.map((group) => [ ...new Set(group.replace(/\n/g, "").split("")) ].length);
+let sums = input.map((group) => [...new Set(group.replace(/\n/gu, "").split(""))].length);
 console.log(sums.reduce((a, b) => a + b));
 
 // Part 2
 sums = input.map((group) => {
     let total = 0;
     const groupCount = group.split("\n").length;
-    const chars = group.replace(/\n/g, "").split("");
-    [ ...new Set(chars) ].forEach((char) => {
-        if (chars.filter((c) => c === char).length === groupCount) total++;
+    const chars = group.replace(/\n/gu, "").split("");
+    [...new Set(chars)].forEach((char) => {
+        if (chars.filter((c) => c === char).length === groupCount)
+            total++;
     });
     return total;
 });

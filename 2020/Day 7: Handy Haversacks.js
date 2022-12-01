@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/7
+/* eslint-disable max-lines */
 
 const input = [
     "drab plum bags contain 5 clear turquoise bags, 5 striped aqua bags, 4 dotted gold bags, 4 plaid chartreuse bags.",
@@ -600,23 +601,25 @@ const input = [
 // Part 1
 const rules = {};
 input.forEach((rule) => {
-    const outerBag = rule.split(" bags ")[ 0 ];
-    const innerBags = Object.fromEntries(rule.split(" contain ")[ 1 ].split(", ").map((bag) => bag.replace(/ bags?\.?/g, "").split(" ")).map((bag) => [ bag.slice(1).join(" "), parseInt(bag[ 0 ]) ]));
-    return rules[ outerBag ] = innerBags;
+    const [outerBag] = rule.split(" bags ");
+    const innerBags = Object.fromEntries(rule.split(" contain ")[1].split(", ").map((bag) => bag.replace(/ bags?\.?/gu, "").split(" "))
+        .map((bag) => [bag.slice(1).join(" "), parseInt(bag[0], 10)]));
+    rules[outerBag] = innerBags;
 });
 const valid = [];
 Object.keys(rules).forEach((outerBag) => {
-    let canHold = rules[ outerBag ];
+    let canHold = rules[outerBag];
     const foo = (bags) => {
         Object.keys(bags).forEach((bag) => {
-            if (rules[ bag ]) {
-                canHold = { ...canHold, ...rules[ bag ] };
-                foo(rules[ bag ]);
-            };
+            if (rules[bag]) {
+                canHold = { ...canHold, ...rules[bag] };
+                foo(rules[bag]);
+            }
         });
     };
-    foo(rules[ outerBag ]);
-    if (canHold[ "shiny gold" ]) valid.push(outerBag);
+    foo(rules[outerBag]);
+    if (canHold["shiny gold"])
+        valid.push(outerBag);
 });
 console.log(valid.length);
 
@@ -625,9 +628,10 @@ let count = 0;
 const foo = (bags) => {
     delete bags.other;
     Object.keys(bags).forEach((bag) => {
-        count += bags[ bag ];
-        for (let i = 0; i < bags[ bag ]; i++) foo(rules[ bag ]);
+        count += bags[bag];
+        for (let i = 0; i < bags[bag]; i++)
+            foo(rules[bag]);
     });
 };
-foo(rules[ "shiny gold" ]);
-console.log(count); 
+foo(rules["shiny gold"]);
+console.log(count);

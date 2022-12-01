@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/4
+/* eslint-disable max-lines */
 
 const input = `byr:2010 pid:#1bb4d8 eyr:2021 hgt:186cm iyr:2020 ecl:grt
 
@@ -1081,22 +1082,23 @@ input.forEach((passport) => {
         passport.includes("byr:") &&
         passport.includes("iyr:") &&
         passport.includes("hgt:")
-    ) valid++;
+    )
+        valid++;
 });
 console.log(valid);
 
 // Part 2
 valid = 0;
-input.forEach((passport) => {
-    passport = passport.replace(/\s/g, "\n");
+input.forEach((x) => {
+    const passport = x.replace(/\s/gu, "\n");
     const regex = {
-        byr: /(byr:)(19[2-9]\d)|(200[0-2])\b/g,
-        iyr: /(iyr:)20((1\d)|(20))\b/g,
-        eyr: /(eyr:)20((2\d)|(30))\b/g,
-        hgt: /(hgt:)((1(([5-8]\d)|(9[0-3]))cm)|(((59)|(6\d)|(7[0-6]))in))\b/g,
-        hcl: /(hcl:)#[0-9a-f]{6}\b/g,
-        ecl: /(ecl:)(amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth)\b/g,
-        pid: /(pid:)\d{9}\b/g
+        byr: /(byr:)(19[2-9]\d)|(200[0-2])\b/gu,
+        ecl: /(ecl:)(amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth)\b/gu,
+        eyr: /(eyr:)20((2\d)|(30))\b/gu,
+        hcl: /(hcl:)#[0-9a-f]{6}\b/gu,
+        hgt: /(hgt:)((1(([5-8]\d)|(9[0-3]))cm)|(((59)|(6\d)|(7[0-6]))in))\b/gu,
+        iyr: /(iyr:)20((1\d)|(20))\b/gu,
+        pid: /(pid:)\d{9}\b/gu
     };
 
     if (
@@ -1107,6 +1109,7 @@ input.forEach((passport) => {
         passport.match(regex.hcl) &&
         passport.match(regex.ecl) &&
         passport.match(regex.pid)
-    ) valid++;
+    )
+        valid++;
 });
 console.log(valid);

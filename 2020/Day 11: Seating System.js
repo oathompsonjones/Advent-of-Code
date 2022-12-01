@@ -97,44 +97,49 @@ const input = [
 ];
 
 // Part 1
-let layouts = [ input ];
-for (let i = 0; layouts[ layouts.length - 1 ].join("") !== layouts[ layouts.length - 2 ]?.join(""); ++i) {
+let layouts = [input];
+for (let i = 0; layouts[layouts.length - 1].join("") !== layouts[layouts.length - 2]?.join(""); ++i) {
     const newLayout = [];
     for (let y = 0; y < input.length; ++y) {
         let newRow = "";
-        for (let x = 0; x < input[ 0 ].length; ++x) {
+        for (let x = 0; x < input[0].length; ++x) {
             const adjacentSeats = [
-                layouts[ layouts.length - 1 ][ y - 1 ]?.[ x - 1 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y - 1 ]?.[ x + 0 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y - 1 ]?.[ x + 1 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 0 ]?.[ x - 1 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 0 ]?.[ x + 0 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 0 ]?.[ x + 1 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 1 ]?.[ x - 1 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 1 ]?.[ x + 0 ] ?? ".",
-                layouts[ layouts.length - 1 ][ y + 1 ]?.[ x + 1 ] ?? "."
+                layouts[layouts.length - 1][y - 1]?.[x - 1] ?? ".",
+                layouts[layouts.length - 1][y - 1]?.[x + 0] ?? ".",
+                layouts[layouts.length - 1][y - 1]?.[x + 1] ?? ".",
+                layouts[layouts.length - 1][y + 0]?.[x - 1] ?? ".",
+                layouts[layouts.length - 1][y + 0]?.[x + 0] ?? ".",
+                layouts[layouts.length - 1][y + 0]?.[x + 1] ?? ".",
+                layouts[layouts.length - 1][y + 1]?.[x - 1] ?? ".",
+                layouts[layouts.length - 1][y + 1]?.[x + 0] ?? ".",
+                layouts[layouts.length - 1][y + 1]?.[x + 1] ?? "."
             ];
-            const currentSeat = adjacentSeats[ 4 ];
-            delete adjacentSeats[ 4 ];
-            if (currentSeat === "L" && !adjacentSeats.includes("#")) newRow += "#";
-            else if (currentSeat === "#" && adjacentSeats.filter((x) => x === "#").length >= 4) newRow += "L";
-            else newRow += currentSeat;
+            const currentSeat = adjacentSeats.splice(4, 1);
+            if (currentSeat === "L" && !adjacentSeats.includes("#"))
+                newRow += "#";
+            else if (currentSeat === "#" && adjacentSeats.filter((z) => z === "#").length >= 4)
+                newRow += "L";
+            else
+                newRow += currentSeat;
         }
         newLayout.push(newRow);
     }
     layouts.push(newLayout);
 }
-console.log(layouts[ layouts.length - 1 ].join("").split("").filter((x) => x === "#").length);
+console.log(layouts[layouts.length - 1].join("").split("")
+    .filter((x) => x === "#").length);
 
 // Part 2
-layouts = [ input ];
-const width = input[ 0 ].length - 1;
+layouts = [input];
+const width = input[0].length - 1;
 const hieght = input.length - 1;
-for (let i = 0; layouts[ layouts.length - 1 ].join("") !== layouts[ layouts.length - 2 ]?.join(""); ++i) {
+for (let i = 0; layouts[layouts.length - 1].join("") !== layouts[layouts.length - 2]?.join(""); ++i) {
     const newLayout = [];
     for (let y = 0; y < input.length; ++y) {
         let newRow = "";
-        for (let x = 0; x < input[ 0 ].length; ++x) {
+        for (let x = 0; x < input[0].length; ++x) {
+            const adjacentSeats = [];
+
             /**
              * Top Left: 0
              * Top Middle: 1
@@ -146,98 +151,109 @@ for (let i = 0; layouts[ layouts.length - 1 ].join("") !== layouts[ layouts.leng
              * Bottom Middle: 7
              * Bottom Right: 8
              */
-            const adjacentSeats = [];
 
             // Top Left
             for (let j = 1; j <= Math.min(x, y); ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y - j ]?.[ x - j ];
+                const pos = layouts[layouts.length - 1][y - j]?.[x - j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 0) adjacentSeats.push(".");
+            if (adjacentSeats.length === 0)
+                adjacentSeats.push(".");
 
             // Top Middle
             for (let j = 1; j <= y; ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y - j ]?.[ x ];
+                const pos = layouts[layouts.length - 1][y - j]?.[x];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 1) adjacentSeats.push(".");
+            if (adjacentSeats.length === 1)
+                adjacentSeats.push(".");
 
             // Top Right
             for (let j = 1; j <= Math.min(width - x, y); ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y - j ]?.[ x + j ];
+                const pos = layouts[layouts.length - 1][y - j]?.[x + j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 2) adjacentSeats.push(".");
+            if (adjacentSeats.length === 2)
+                adjacentSeats.push(".");
 
             // Middle Left
             for (let j = 1; j <= x; ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y ]?.[ x - j ];
+                const pos = layouts[layouts.length - 1][y]?.[x - j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 3) adjacentSeats.push(".");
+            if (adjacentSeats.length === 3)
+                adjacentSeats.push(".");
 
-            adjacentSeats.push(layouts[ layouts.length - 1 ][ y ][ x ]);
+            adjacentSeats.push(layouts[layouts.length - 1][y][x]);
 
             // Middle Right
             for (let j = 1; j <= width - x; ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y ]?.[ x + j ];
+                const pos = layouts[layouts.length - 1][y]?.[x + j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 5) adjacentSeats.push(".");
+            if (adjacentSeats.length === 5)
+                adjacentSeats.push(".");
 
             // Bottom Left
             for (let j = 1; j <= Math.min(x, hieght - y); ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y + j ]?.[ x - j ];
+                const pos = layouts[layouts.length - 1][y + j]?.[x - j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 6) adjacentSeats.push(".");
+            if (adjacentSeats.length === 6)
+                adjacentSeats.push(".");
 
             // Bottom Middle
             for (let j = 1; j <= hieght - y; ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y + j ]?.[ x ];
+                const pos = layouts[layouts.length - 1][y + j]?.[x];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 7) adjacentSeats.push(".");
+            if (adjacentSeats.length === 7)
+                adjacentSeats.push(".");
 
             // Bottom Right
             for (let j = 1; j <= Math.min(width - x, hieght - y); ++j) {
-                const pos = layouts[ layouts.length - 1 ][ y + j ]?.[ x + j ];
+                const pos = layouts[layouts.length - 1][y + j]?.[x + j];
                 if (pos !== ".") {
                     adjacentSeats.push(pos ?? ".");
                     break;
                 }
             }
-            if (adjacentSeats.length === 8) adjacentSeats.push(".");
+            if (adjacentSeats.length === 8)
+                adjacentSeats.push(".");
 
-            const currentSeat = adjacentSeats[ 4 ];
-            delete adjacentSeats[ 4 ];
-            if (currentSeat === "L" && !adjacentSeats.includes("#")) newRow += "#";
-            else if (currentSeat === "#" && adjacentSeats.filter((x) => x === "#").length >= 5) newRow += "L";
-            else newRow += currentSeat;
+            const currentSeat = adjacentSeats.splice(4, 1);
+            delete adjacentSeats[4];
+            if (currentSeat === "L" && !adjacentSeats.includes("#"))
+                newRow += "#";
+            else if (currentSeat === "#" && adjacentSeats.filter((z) => z === "#").length >= 5)
+                newRow += "L";
+            else
+                newRow += currentSeat;
         }
         newLayout.push(newRow);
     }
     layouts.push(newLayout);
 }
-console.log(layouts[ layouts.length - 1 ].join("").split("").filter((x) => x === "#").length);
+console.log(layouts[layouts.length - 1].join("").split("")
+    .filter((x) => x === "#").length);

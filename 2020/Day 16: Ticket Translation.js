@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/16
+/* eslint-disable max-lines */
 
 let input = [
     "departure location: 47-874 or 885-960",
@@ -275,21 +276,22 @@ input = [
 ];
 
 // Part 1
-const rules = input.join("\n").split("\nyour ticket:\n")[ 0 ].split("\n");
-const yourTicket = input.join("\n").split("\nyour ticket:\n")[ 1 ].split("\nnearby tickets:\n")[ 0 ];
-const nearbyTickets = input.join("\n").split("\nyour ticket:\n")[ 1 ].split("\nnearby tickets:\n")[ 1 ].split("\n");
+const rules = input.join("\n").split("\nyour ticket:\n")[0].split("\n");
+const [yourTicket] = input.join("\n").split("\nyour ticket:\n")[1].split("\nnearby tickets:\n");
+const nearbyTickets = input.join("\n").split("\nyour ticket:\n")[1].split("\nnearby tickets:\n")[1].split("\n");
 const invalidValues = [];
 const invalidTickets = new Set();
 nearbyTickets.forEach((ticket) => {
-    const values = ticket.split(",").map((x) => parseInt(x));
+    const values = ticket.split(",").map((x) => parseInt(x, 10));
     values.forEach((value) => {
         let works = false;
         rules.forEach((rule) => {
-            const sets = [ rule.split(" ")[ 1 ], rule.split(" ")[ 3 ] ];
+            const sets = [rule.split(" ")[1], rule.split(" ")[3]];
             sets.forEach((set) => {
-                const min = parseInt(set.split("-")[ 0 ]);
-                const max = parseInt(set.split("-")[ 1 ]);
-                if (value >= min && value <= max) works = true;
+                const min = parseInt(set.split("-")[0], 10);
+                const max = parseInt(set.split("-")[1], 10);
+                if (value >= min && value <= max)
+                    works = true;
             });
         });
         if (!works) {
@@ -302,24 +304,26 @@ console.log(invalidValues.reduce((a, b) => a + b));
 
 // Part 2
 const validTickets = nearbyTickets.filter((ticket) => !invalidTickets.has(ticket));
-const allFields = rules.map((rule) => [ rule.split(": ")[ 0 ] ].concat(rule.split(": ")[ 1 ].split(" or "))).map((x) => x.join(","));
+const allFields = rules.map((rule) => [rule.split(": ")[0]].concat(rule.split(": ")[1].split(" or "))).map((x) => x.join(","));
 let fields = [];
 for (let i = 0; i < allFields.length; ++i) {
-    const testValues = validTickets.map((x) => parseInt(x.split(",")[ i ]));
+    const testValues = validTickets.map((x) => parseInt(x.split(",")[i], 10));
     const possibleFields = testValues.map((value) => allFields.filter((field) => {
         const temp = field.split(",");
         const ranges = temp.slice(1);
-        const min0 = parseInt(ranges[ 0 ].split("-")[ 0 ]);
-        const max0 = parseInt(ranges[ 0 ].split("-")[ 1 ]);
-        const min1 = parseInt(ranges[ 1 ].split("-")[ 0 ]);
-        const max1 = parseInt(ranges[ 1 ].split("-")[ 1 ]);
+        const min0 = parseInt(ranges[0].split("-")[0], 10);
+        const max0 = parseInt(ranges[0].split("-")[1], 10);
+        const min1 = parseInt(ranges[1].split("-")[0], 10);
+        const max1 = parseInt(ranges[1].split("-")[1], 10);
         return value >= min0 && value <= max0 || value >= min1 && value <= max1;
     }));
-    const correctField = allFields.find((x) => possibleFields.every((y) => y.includes(x) && !fields.includes(x)));
+    // eslint-disable-next-line no-loop-func
+    const correctField = allFields.find((x) => possibleFields
+        .every((y) => y.includes(x) && !fields.includes(x)));
     fields.push(correctField);
     console.log(correctField);
 }
-fields = fields.filter((x) => x).map((field) => field.split(",")[ 0 ]);
-const ticket = yourTicket.split(",").map((x, i) => `${fields[ i ]}:${parseInt(x)}`);
+fields = fields.filter((x) => x).map((field) => field.split(",")[0]);
+const ticket = yourTicket.split(",").map((x, i) => `${fields[i]}:${parseInt(x, 10)}`);
 const departureValues = ticket.filter((x) => x.includes("departure"));
-console.log(departureValues.map((x) => parseInt(x.split(":")[ 2 ])).reduce((a, b) => a * b, 1));
+console.log(departureValues.map((x) => parseInt(x.split(":")[2], 10)).reduce((a, b) => a * b, 1));

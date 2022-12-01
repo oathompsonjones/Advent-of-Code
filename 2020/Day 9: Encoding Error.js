@@ -1,4 +1,5 @@
 // https://adventofcode.com/2020/day/9
+/* eslint-disable max-lines */
 
 const input = [
     5,
@@ -1005,19 +1006,22 @@ const input = [
 
 // Part 1
 const preamble = 25;
-let i;
-for (i = preamble; i < input.length; ++i) {
+let i = preamble;
+for (; i < input.length; ++i) {
     const lastSet = input.slice(i - preamble, i);
     const sums = lastSet.map((x, j) => lastSet.slice(j + 1).map((y) => x + y)).flat();
-    if (!sums.includes(input[ i ])) break;
+    if (!sums.includes(input[i]))
+        break;
 }
-const output = input[ i ];
+const output = input[i];
 console.log(output);
 
 // Part 2
-let set = [ 0 ];
-for (i = 0; i < input.length; ++i, set = [ 0 ]) {
-    for (let j = 0; set.reduce((a, b) => a + b) < output; ++j) set.push(input[ i + j ]);
-    if (set.reduce((a, b) => a + b) === output) break;
+let set = [0];
+for (i = 0; i < input.length; ++i, set = [0]) {
+    for (let j = 0; set.reduce((a, b) => a + b) < output; ++j)
+        set.push(input[i + j]);
+    if (set.reduce((a, b) => a + b) === output)
+        break;
 }
-console.log(set.sort((a, b) => a - b)[ 1 ] + set.sort((a, b) => a - b)[ set.length - 1 ]);
+console.log(set.sort((a, b) => a - b)[1] + set.sort((a, b) => a - b)[set.length - 1]);

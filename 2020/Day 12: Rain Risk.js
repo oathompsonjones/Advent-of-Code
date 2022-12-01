@@ -1,4 +1,7 @@
 // https://adventofcode.com/2020/day/12
+/* eslint-disable max-classes-per-file */
+/* eslint-disable max-lines */
+/* eslint-disable no-constructor-return */
 
 const input = [
     "E1",
@@ -783,68 +786,108 @@ const input = [
 
 // Part 1
 class Ship {
-    constructor () {
-        this.direction = [ 1, 0 ];
-        this.position = [ 0, 0 ];
+    constructor() {
+        this.direction = [1, 0];
+        this.position = [0, 0];
         input.forEach((line) => {
-            const instruction = line[ 0 ];
-            const value = parseInt(line.slice(1));
-            this[ instruction ](value);
+            const [instruction] = line;
+            const value = parseInt(line.slice(1), 10);
+            this[instruction](value);
         });
-        return [ Math.abs(this.position[ 0 ]) + Math.abs(this.position[ 1 ]), this.position ];
+        return [Math.abs(this.position[0]) + Math.abs(this.position[1]), this.position];
     }
 
-    N(val) { this.position[ 1 ] += val; }
-    S(val) { this.position[ 1 ] -= val; }
-    E(val) { this.position[ 0 ] += val; }
-    W(val) { this.position[ 0 ] -= val; }
+    N(val) {
+        this.position[1] += val;
+    }
+
+    S(val) {
+        this.position[1] -= val;
+    }
+
+    E(val) {
+        this.position[0] += val;
+    }
+
+    W(val) {
+        this.position[0] -= val;
+    }
+
     L(val) {
-        if (val === 90) this.direction = [ -this.direction[ 1 ], this.direction[ 0 ] ];
-        else if (val === 180) this.direction = [ -this.direction[ 0 ], -this.direction[ 1 ] ];
-        else if (val === 270) this.direction = [ this.direction[ 1 ], -this.direction[ 0 ] ];
+        if (val === 90)
+            this.direction = [-this.direction[1], this.direction[0]];
+        else if (val === 180)
+            this.direction = [-this.direction[0], -this.direction[1]];
+        else if (val === 270)
+            this.direction = [this.direction[1], -this.direction[0]];
     }
+
     R(val) {
-        if (val === 90) this.direction = [ this.direction[ 1 ], -this.direction[ 0 ] ];
-        else if (val === 180) this.direction = [ -this.direction[ 0 ], -this.direction[ 1 ] ];
-        else if (val === 270) this.direction = [ -this.direction[ 1 ], this.direction[ 0 ] ];
+        if (val === 90)
+            this.direction = [this.direction[1], -this.direction[0]];
+        else if (val === 180)
+            this.direction = [-this.direction[0], -this.direction[1]];
+        else if (val === 270)
+            this.direction = [-this.direction[1], this.direction[0]];
     }
+
     F(val) {
-        this.position[ 0 ] += this.direction[ 0 ] * val;
-        this.position[ 1 ] += this.direction[ 1 ] * val;
+        this.position[0] += this.direction[0] * val;
+        this.position[1] += this.direction[1] * val;
     }
 }
-console.log(new Ship()[ 0 ]);
+console.log(new Ship()[0]);
 
 // Part 2
 class Ship2 {
-    constructor () {
-        this.shipPosition = [ 0, 0 ];
-        this.waypointPosition = [ 10, 1 ];
+    constructor() {
+        this.shipPosition = [0, 0];
+        this.waypointPosition = [10, 1];
         input.forEach((line) => {
-            const instruction = line[ 0 ];
-            const value = parseInt(line.slice(1));
-            this[ instruction ](value);
+            const [instruction] = line;
+            const value = parseInt(line.slice(1), 10);
+            this[instruction](value);
         });
-        return [ Math.abs(this.shipPosition[ 0 ]) + Math.abs(this.shipPosition[ 1 ]), this.shipPosition ];
+        return [Math.abs(this.shipPosition[0]) + Math.abs(this.shipPosition[1]), this.shipPosition];
     }
 
-    N(val) { this.waypointPosition[ 1 ] += val; }
-    S(val) { this.waypointPosition[ 1 ] -= val; }
-    E(val) { this.waypointPosition[ 0 ] += val; }
-    W(val) { this.waypointPosition[ 0 ] -= val; }
+    N(val) {
+        this.waypointPosition[1] += val;
+    }
+
+    S(val) {
+        this.waypointPosition[1] -= val;
+    }
+
+    E(val) {
+        this.waypointPosition[0] += val;
+    }
+
+    W(val) {
+        this.waypointPosition[0] -= val;
+    }
+
     L(val) {
-        if (val === 90) this.waypointPosition = [ -this.waypointPosition[ 1 ], this.waypointPosition[ 0 ] ];
-        else if (val === 180) this.waypointPosition = [ -this.waypointPosition[ 0 ], -this.waypointPosition[ 1 ] ];
-        else if (val === 270) this.waypointPosition = [ this.waypointPosition[ 1 ], -this.waypointPosition[ 0 ] ];
+        if (val === 90)
+            this.waypointPosition = [-this.waypointPosition[1], this.waypointPosition[0]];
+        else if (val === 180)
+            this.waypointPosition = [-this.waypointPosition[0], -this.waypointPosition[1]];
+        else if (val === 270)
+            this.waypointPosition = [this.waypointPosition[1], -this.waypointPosition[0]];
     }
+
     R(val) {
-        if (val === 90) this.waypointPosition = [ this.waypointPosition[ 1 ], -this.waypointPosition[ 0 ] ];
-        else if (val === 180) this.waypointPosition = [ -this.waypointPosition[ 0 ], -this.waypointPosition[ 1 ] ];
-        else if (val === 270) this.waypointPosition = [ -this.waypointPosition[ 1 ], this.waypointPosition[ 0 ] ];
+        if (val === 90)
+            this.waypointPosition = [this.waypointPosition[1], -this.waypointPosition[0]];
+        else if (val === 180)
+            this.waypointPosition = [-this.waypointPosition[0], -this.waypointPosition[1]];
+        else if (val === 270)
+            this.waypointPosition = [-this.waypointPosition[1], this.waypointPosition[0]];
     }
+
     F(val) {
-        this.shipPosition[ 0 ] += this.waypointPosition[ 0 ] * val;
-        this.shipPosition[ 1 ] += this.waypointPosition[ 1 ] * val;
+        this.shipPosition[0] += this.waypointPosition[0] * val;
+        this.shipPosition[1] += this.waypointPosition[1] * val;
     }
 }
-console.log(new Ship2()[ 0 ]);
+console.log(new Ship2()[0]);
