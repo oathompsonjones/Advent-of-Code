@@ -1,0 +1,10 @@
+{
+    "name": "advent-of-code",
+    "version": "1.0.0",
+    "description": "My Advent of Code solutions.",
+    "author": "oathompsonjones",
+    "license": "ISC",
+    "dependencies": {
+        "@oathompsonjones/eslintrc": "^1.0.0"
+    }
+}
