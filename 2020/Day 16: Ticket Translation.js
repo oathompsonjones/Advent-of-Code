@@ -1,5 +1,4 @@
 // https://adventofcode.com/2020/day/16
-/* eslint-disable max-lines */
 
 let input = [
     "departure location: 47-874 or 885-960",

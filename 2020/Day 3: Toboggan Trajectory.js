@@ -1,5 +1,4 @@
 // https://adventofcode.com/2020/day/3
-/* eslint-disable max-lines */
 
 const input = [
     "...#.....#.......##......#.....",
