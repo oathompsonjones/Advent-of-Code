@@ -5,6 +5,6 @@
     "author": "oathompsonjones",
     "license": "ISC",
     "dependencies": {
-        "@oathompsonjones/eslintrc": "^1.0.8"
+        "@oathompsonjones/eslintrc": "^1.0.9"
     }
 }
