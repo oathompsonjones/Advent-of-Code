@@ -5,6 +5,6 @@
     "author": "oathompsonjones",
     "license": "ISC",
     "dependencies": {
-        "@oathompsonjones/eslintrc": "^1.0.9"
+        "@oathompsonjones/eslint-config": "file:../eslint-config"
     }
 }

@@ -1,1 +1,1 @@
-module.exports = require("@oathompsonjones/eslintrc");
+module.exports = { extends: require.resolve("@oathompsonjones/eslint-config") };
