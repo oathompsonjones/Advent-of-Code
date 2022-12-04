@@ -1,5 +1,4 @@
 // https://adventofcode.com/2022/day/3
-
 const input = require("../Utils/GetInput")();
 
 let rucksacks = input.split("\n").map((rucksack) => {
