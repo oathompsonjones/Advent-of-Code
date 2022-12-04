@@ -1,9 +1,9 @@
 // https://adventofcode.com/2022/day/2
 const input = require("../Utils/GetInput")();
 
+// Part 1
 const [WIN, DRAW, LOSE] = [6, 3, 0];
 const [ROCK, PAPER, SCISSORS] = [1, 2, 3];
-
 const formattedInput = input.split("\n").map((line) => line.split(" "));
 const getChoices = (char) => ({
     A: ROCK,
@@ -52,6 +52,7 @@ for (const line of formattedInput) {
 }
 console.log(myTotalScore);
 
+// Part 2
 const getChoiceAndOutcome = (char) => ({
     A: ROCK,
     B: PAPER,

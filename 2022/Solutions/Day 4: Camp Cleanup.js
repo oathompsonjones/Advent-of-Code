@@ -1,8 +1,8 @@
 // https://adventofcode.com/2022/day/4
 const input = require("../Utils/GetInput")();
 
+// Part 1
 const rangePairs = input.split("\n").map((line) => line.split(",").map((range) => range.split("-").map(Number)));
-
 let pairsCount = 0;
 for (const [[start1, end1], [start2, end2]] of rangePairs) {
     const firstIsEnclosed = start1 >= start2 && start1 <= end2 && end1 <= end2;
@@ -12,6 +12,7 @@ for (const [[start1, end1], [start2, end2]] of rangePairs) {
 }
 console.log(pairsCount);
 
+// Part 2
 pairsCount = 0;
 for (const [[start1, end1], [start2, end2]] of rangePairs) {
     const start1IsInRange2 = start1 >= start2 && start1 <= end2;

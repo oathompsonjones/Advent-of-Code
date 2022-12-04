@@ -1,6 +1,7 @@
 // https://adventofcode.com/2022/day/3
 const input = require("../Utils/GetInput")();
 
+// Part 1
 let rucksacks = input.split("\n").map((rucksack) => {
     const itemCount = rucksack.length;
     const compartment1 = rucksack.slice(0, itemCount / 2);
@@ -27,6 +28,7 @@ for (const [compartment1, compartment2] of rucksacks) {
 }
 console.log(prioritySum);
 
+// Part 2
 rucksacks = input.split("\n");
 const groups = [];
 for (let i = 0; i < rucksacks.length; i += 3)
