@@ -5,6 +5,6 @@
     "author": "oathompsonjones",
     "license": "ISC",
     "dependencies": {
-        "@oathompsonjones/eslint-config": "^0.0.16"
+        "@oathompsonjones/eslint-config": "^0.0.22"
     }
 }
