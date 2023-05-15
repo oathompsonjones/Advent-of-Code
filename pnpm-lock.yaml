@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@oathompsonjones/eslint-config':
-    specifier: ^0.0.28
-    version: 0.0.28(@typescript-eslint/eslint-plugin@5.59.5)(@typescript-eslint/parser@5.59.5)(eslint-plugin-react@7.32.2)(eslint@8.40.0)
+    specifier: ^0.0.52
+    version: 0.0.52(typescript@5.0.4)
 
 packages:
 
@@ -85,18 +85,16 @@ packages:
       fastq: 1.15.0
     dev: false
 
-  /@oathompsonjones/eslint-config@0.0.28(@typescript-eslint/eslint-plugin@5.59.5)(@typescript-eslint/parser@5.59.5)(eslint-plugin-react@7.32.2)(eslint@8.40.0):
-    resolution: {integrity: sha512-Wyr5miYDGCHWLzbKw3D9OZtJ6aP6Jnp26dTPhwU+z2nhXiuWDNSvufmcrMCdkhUOlmC3llGE93shyLShNJ32sA==}
-    peerDependencies:
-      '@typescript-eslint/eslint-plugin': ^5.45.0
-      '@typescript-eslint/parser': ^5.45.0
-      eslint: ^8.28.0
-      eslint-plugin-react: ^7.31.11
+  /@oathompsonjones/eslint-config@0.0.52(typescript@5.0.4):
+    resolution: {integrity: sha512-6r7bb2vZcvuSXuyyc2EOcB2boaOdWiHvCrqsV5f3UWw/n6Cz5ucMkwMWwAwBR25bzbNCvDJWWyFWm0/9Ma0cIA==}
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.59.5(@typescript-eslint/parser@5.59.5)(eslint@8.40.0)(typescript@5.0.4)
       '@typescript-eslint/parser': 5.59.5(eslint@8.40.0)(typescript@5.0.4)
       eslint: 8.40.0
       eslint-plugin-react: 7.32.2(eslint@8.40.0)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: false
 
   /@types/json-schema@7.0.11:
