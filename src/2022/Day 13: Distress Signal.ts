@@ -1,5 +1,5 @@
 // https://adventofcode.com/2022/day/13
-import getInput from "../utils/getInput.js";
+import getInput from "../getInput.js";
 
 const input = await getInput();
 

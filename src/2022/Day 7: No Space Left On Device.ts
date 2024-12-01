@@ -1,6 +1,6 @@
 // https://adventofcode.com/2022/day/7
 /* eslint-disable @typescript-eslint/naming-convention */
-import getInput from "../utils/getInput.js";
+import getInput from "../getInput.js";
 
 const input = await getInput();
 
