@@ -5,6 +5,7 @@ const input = await getInput();
 const size: [number, number] = [101, 103];
 
 // Part 1
+
 type Robot = { position: [number, number]; velocity: [number, number]; };
 const robots: Robot[] = input
     .split("\n").map((robot) => {
